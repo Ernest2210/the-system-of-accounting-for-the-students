@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class GUI {
@@ -28,8 +30,13 @@ public class GUI {
         openFileButton = new JButton("Открыть файл");
         scrollPane = new JScrollPane(scrollPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-        scrollPanel.setBackground(Color.MAGENTA);
-        mainPanel.setBackground(Color.BLUE);
+        addClearTableButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                printEmptyTable();
+                SwingUtilities.updateComponentTreeUI(jFrame);
+            }
+        });
 
         BoxLayout boxLayout = new BoxLayout(scrollPanel, BoxLayout.Y_AXIS);
 
@@ -44,6 +51,7 @@ public class GUI {
         mainPanel.add(scrollPane, BorderLayout.CENTER);
         jFrame.add(mainPanel, BorderLayout.CENTER);
         jFrame.add(addPanel, BorderLayout.PAGE_START);
+        SwingUtilities.updateComponentTreeUI(jFrame);
     }
 
     protected static void printEmptyTable(){
@@ -91,6 +99,7 @@ public class GUI {
         GUITables table = new GUITables(FIO, lesson, grade, numOfStud, fives, fours, threes,twos,notcert);
         table.printEmptyTable();
         tables.add(table);
+        SwingUtilities.updateComponentTreeUI(jFrame);
     }
 
     private static JFrame getFrame(){
