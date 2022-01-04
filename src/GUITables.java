@@ -6,20 +6,18 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class GUITables {
-    private String grade;
-    private String lesson;
-    private String nameOfTeacher;
-    private String numberOfStudents;
-    private ArrayList<String> fives;
-    private ArrayList<String> fours;
-    private ArrayList<String> threes;
-    private ArrayList<String> twos;
-
-    //Нужно ли хранить??
-    private ArrayList<String> notCertified; //неатестованы
-    private ArrayList<String> quality; //качество
-    private ArrayList<String> academicPerformance; //успеваемость
-    private ArrayList<String> averageScore; //ср. юалл
+    public String grade;
+    public String lesson;
+    public String nameOfTeacher;
+    public String numberOfStudents;
+    public ArrayList<String> fives;
+    public ArrayList<String> fours;
+    public ArrayList<String> threes;
+    public ArrayList<String> twos;
+    public ArrayList<String> notCertified; //неатестованы
+    public ArrayList<String> quality; //качество
+    public ArrayList<String> academicPerformance; //успеваемость
+    public ArrayList<String> averageScore; //ср. юалл
 
     public JPanel tablePanel;
     public JLabel FIOLabel;

@@ -3,6 +3,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GUI {
@@ -30,6 +32,22 @@ public class GUI {
         addTableButton = new JButton("Добавить таблицу из файла");
         openFileButton = new JButton("Открыть файл");
         scrollPane = new JScrollPane(scrollPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                System.out.println(fileChooser.showSaveDialog(mainPanel));
+                File file = fileChooser.getSelectedFile();
+                String directory = file.getParent();
+                String fileName = file.getName();
+                try {
+                    FileManager.saveFile(directory,fileName,tables);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
 
         addClearTableButton.addActionListener(new ActionListener(){
             @Override
