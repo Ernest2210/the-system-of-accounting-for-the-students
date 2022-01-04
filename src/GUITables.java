@@ -116,10 +116,7 @@ public class GUITables {
         tablePanel.setMaximumSize(new Dimension(1000000000, 200));
         tablePanel.setLayout(new BorderLayout());
 
-        tablePanel.setBorder(new EmptyBorder(0,0,5,0));
-
         tablePanel.setBackground(Color.BLACK);
-
         FIOLabel = new JLabel("ФИО:");
         FIOTextField = new JTextField(20);
         FIOTextField.getDocument().addDocumentListener(new DocumentListener() {
@@ -135,8 +132,6 @@ public class GUITables {
             public void changedUpdate(DocumentEvent e) {}
         });
         FIOTextField.setText(nameOfTeacher);
-
-
         lessonLabel = new JLabel("Предмет:");
         lessonTextField = new JTextField(20);
         lessonTextField.setText(lesson);
@@ -152,7 +147,6 @@ public class GUITables {
             @Override
             public void changedUpdate(DocumentEvent e) {}
         });
-
         gradeLabel = new JLabel("Класс:");
         gradeTextField = new JTextField(3);
         gradeTextField.setText(grade);
@@ -168,10 +162,7 @@ public class GUITables {
             @Override
             public void changedUpdate(DocumentEvent e) {}
         });
-
-
         numOfStudLabel = new JLabel("Кол. учеников");
-
         numOfStudTextField =new JTextField(3);
         numOfStudTextField.setText(numberOfStudents);
         numOfStudTextField.getDocument().addDocumentListener(new DocumentListener() {
@@ -211,10 +202,6 @@ public class GUITables {
             @Override
             public void changedUpdate(DocumentEvent e) {}
         });
-
-
-
-
         fivesTextFields = new ArrayList<>();
         foursTextFields = new ArrayList<>();
         threesTextFields = new ArrayList<>();
@@ -482,7 +469,7 @@ public class GUITables {
         centerPanel.add(l1);
         for(int i = 0; i < 5; i++){
             if  (i  <   4){
-                centerPanel.add(new JLabel(Integer.toString(i+1) + " чет"));
+                centerPanel.add(new JLabel(Integer.toString(i+1) + " четверть"));
             }else{
                 centerPanel.add(new JLabel("год"));
             }

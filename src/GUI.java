@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -89,7 +90,11 @@ public class GUI {
 
         GUITables table = new GUITables(" ", " ", " ", "0", _five, _four, _three, _two, _notcert);
         table.printEmptyTable();
+        if(!(tables.isEmpty())){
+            tables.get(tables.size()-1).tablePanel.setBorder(new EmptyBorder(0,0,5,0));
+        }
         tables.add(table);
+        SwingUtilities.updateComponentTreeUI(jFrame);
     }
 
     public static void printTables(String FIO, String lesson, String grade,
@@ -98,8 +103,10 @@ public class GUI {
                                    ArrayList<String> twos, ArrayList<String> notcert){
         GUITables table = new GUITables(FIO, lesson, grade, numOfStud, fives, fours, threes,twos,notcert);
         table.printEmptyTable();
+        if(!(tables.isEmpty())){
+            tables.get(tables.size()-1).tablePanel.setBorder(new EmptyBorder(0,0,5,0));
+        }
         tables.add(table);
-        SwingUtilities.updateComponentTreeUI(jFrame);
     }
 
     private static JFrame getFrame(){
