@@ -3,9 +3,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class GUITables {
+    public GUITables th = this;
     public String grade;
     public String lesson;
     public String nameOfTeacher;
@@ -19,6 +22,7 @@ public class GUITables {
     public ArrayList<String> academicPerformance; //успеваемость
     public ArrayList<String> averageScore; //ср. юалл
 
+    public JButton deleteButton;
     public JPanel tablePanel;
     public JLabel FIOLabel;
     public JTextField FIOTextField;
@@ -115,16 +119,29 @@ public class GUITables {
         tablePanel.setLayout(new BorderLayout());
 
         tablePanel.setBackground(Color.BLACK);
+        deleteButton= new JButton("Удалить");
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GUI.scrollPanel.remove(tablePanel);
+                GUI.removet(th);
+                System.out.println(GUI.tables.size());
+                GUI.jFrame.revalidate();
+                GUI.jFrame.repaint();
+            }
+        });
         FIOLabel = new JLabel("ФИО:");
         FIOTextField = new JTextField(20);
         FIOTextField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 nameOfTeacher = FIOTextField.getText();
+                Main.isFileSaved = false;
             }
             @Override
             public void removeUpdate(DocumentEvent e) {
                 nameOfTeacher = FIOTextField.getText();
+                Main.isFileSaved = false;
             }
             @Override
             public void changedUpdate(DocumentEvent e) {}
@@ -137,10 +154,12 @@ public class GUITables {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 lesson = lessonTextField.getText();
+                Main.isFileSaved = false;
             }
             @Override
             public void removeUpdate(DocumentEvent e) {
                 lesson = lessonTextField.getText();
+                Main.isFileSaved = false;
             }
             @Override
             public void changedUpdate(DocumentEvent e) {}
@@ -152,10 +171,12 @@ public class GUITables {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 grade = gradeTextField.getText();
+                Main.isFileSaved = false;
             }
             @Override
             public void removeUpdate(DocumentEvent e) {
                 grade = gradeTextField.getText();
+                Main.isFileSaved = false;
             }
             @Override
             public void changedUpdate(DocumentEvent e) {}
@@ -179,6 +200,7 @@ public class GUITables {
                     academicPerformanceTextFields.get(j).setText(Integer.toString(ac));
                     averageScoreTextFields.get(j).setText(Double.toString(av));
                 }
+                Main.isFileSaved = false;
             }
 
             @Override
@@ -196,6 +218,7 @@ public class GUITables {
                     academicPerformanceTextFields.get(j).setText(Integer.toString(ac));
                     averageScoreTextFields.get(j).setText(Double.toString(av));
                 }
+                Main.isFileSaved = false;
             }
             @Override
             public void changedUpdate(DocumentEvent e) {}
@@ -230,6 +253,7 @@ public class GUITables {
                             qualityTextFields.get(j).setText(Integer.toString(qu));
                             academicPerformanceTextFields.get(j).setText(Integer.toString(ac));
                             averageScoreTextFields.get(j).setText(Double.toString(av));
+                            Main.isFileSaved = false;
                             break;
                         }
                     }
@@ -251,6 +275,7 @@ public class GUITables {
                             qualityTextFields.get(j).setText(Integer.toString(qu));
                             academicPerformanceTextFields.get(j).setText(Integer.toString(ac));
                             averageScoreTextFields.get(j).setText(Double.toString(av));
+                            Main.isFileSaved = false;
                             break;
                         }
                     }
@@ -280,6 +305,7 @@ public class GUITables {
                             qualityTextFields.get(j).setText(Integer.toString(qu));
                             academicPerformanceTextFields.get(j).setText(Integer.toString(ac));
                             averageScoreTextFields.get(j).setText(Double.toString(av));
+                            Main.isFileSaved = false;
                             break;
                         }
                     }
@@ -301,6 +327,7 @@ public class GUITables {
                             qualityTextFields.get(j).setText(Integer.toString(qu));
                             academicPerformanceTextFields.get(j).setText(Integer.toString(ac));
                             averageScoreTextFields.get(j).setText(Double.toString(av));
+                            Main.isFileSaved = false;
                             break;
                         }
                     }
@@ -330,6 +357,7 @@ public class GUITables {
                             qualityTextFields.get(j).setText(Integer.toString(qu));
                             academicPerformanceTextFields.get(j).setText(Integer.toString(ac));
                             averageScoreTextFields.get(j).setText(Double.toString(av));
+                            Main.isFileSaved = false;
                             break;
                         }
                     }
@@ -351,6 +379,7 @@ public class GUITables {
                             qualityTextFields.get(j).setText(Integer.toString(qu));
                             academicPerformanceTextFields.get(j).setText(Integer.toString(ac));
                             averageScoreTextFields.get(j).setText(Double.toString(av));
+                            Main.isFileSaved = false;
                             break;
                         }
                     }
@@ -380,6 +409,7 @@ public class GUITables {
                             qualityTextFields.get(j).setText(Integer.toString(qu));
                             academicPerformanceTextFields.get(j).setText(Integer.toString(ac));
                             averageScoreTextFields.get(j).setText(Double.toString(av));
+                            Main.isFileSaved = false;
                             break;
                         }
                     }
@@ -401,6 +431,7 @@ public class GUITables {
                             qualityTextFields.get(j).setText(Integer.toString(qu));
                             academicPerformanceTextFields.get(j).setText(Integer.toString(ac));
                             averageScoreTextFields.get(j).setText(Double.toString(av));
+                            Main.isFileSaved = false;
                             break;
                         }
                     }
@@ -431,6 +462,7 @@ public class GUITables {
                             qualityTextFields.get(j).setText(Integer.toString(qu));
                             academicPerformanceTextFields.get(j).setText(Integer.toString(ac));
                             averageScoreTextFields.get(j).setText(Double.toString(av));
+                            Main.isFileSaved = false;
                             break;
                         }
                     }
@@ -452,6 +484,7 @@ public class GUITables {
                             qualityTextFields.get(j).setText(Integer.toString(qu));
                             academicPerformanceTextFields.get(j).setText(Integer.toString(ac));
                             averageScoreTextFields.get(j).setText(Double.toString(av));
+                            Main.isFileSaved = false;
                             break;
                         }
                     }
@@ -477,6 +510,7 @@ public class GUITables {
     public void printEmptyTable(){
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new FlowLayout());
+        topPanel.add(deleteButton);
         topPanel.add(FIOLabel);
         topPanel.add(FIOTextField);
         topPanel.add(lessonLabel);

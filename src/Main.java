@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class Main{
+    public static boolean isFileSaved = true;
     public static final String FILEFORMAT = "std";
     public static boolean isNumeric(String str) {
         try {
