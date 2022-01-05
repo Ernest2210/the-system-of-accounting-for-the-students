@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class Main{
+    public static final String FILEFORMAT = "std";
     public static boolean isNumeric(String str) {
         try {
             double d = Double.parseDouble(str);

@@ -411,6 +411,56 @@ public class GUITables {
             twosTextFields.add(j4);
             JTextField l5 = new JTextField(3);
             l5.setText(notCertified.get(i));
+            l5.setName(Integer.toString(i));
+
+
+            l5.getDocument().addDocumentListener(new DocumentListener() {
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    for(int j = 0; j < 5; j++){
+                        String h = fivesTextFields.get(j).getName();
+                        if(h.equals(l5.getName())){
+                            if (Main.isNumeric(l5.getText())){
+                                notCert.set(j, l5.getText());
+                            }else{
+                                notCert.set(j,"0");
+                            }
+                            int qu = calculateQuality(fives.get(j), fours.get(j));
+                            int ac = calculateAcademicPerformace(fives.get(j), fours.get(j), threes.get(j));
+                            double av = calculateAverangeScore(fives.get(j), fours.get(j), threes.get(j), twos.get(j));
+                            qualityTextFields.get(j).setText(Integer.toString(qu));
+                            academicPerformanceTextFields.get(j).setText(Integer.toString(ac));
+                            averageScoreTextFields.get(j).setText(Double.toString(av));
+                            break;
+                        }
+                    }
+                }
+
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    for(int j = 0; j < 5; j++){
+                        String h = fivesTextFields.get(j).getName();
+                        if(h.equals(j4.getName())){
+                            if (Main.isNumeric(j4.getText())){
+                                twos.set(j, j4.getText());
+                            }else{
+                                twos.set(j,"0");
+                            }
+                            int qu = calculateQuality(fives.get(j), fours.get(j));
+                            int ac = calculateAcademicPerformace(fives.get(j), fours.get(j), threes.get(j));
+                            double av = calculateAverangeScore(fives.get(j), fours.get(j), threes.get(j), twos.get(j));
+                            qualityTextFields.get(j).setText(Integer.toString(qu));
+                            academicPerformanceTextFields.get(j).setText(Integer.toString(ac));
+                            averageScoreTextFields.get(j).setText(Double.toString(av));
+                            break;
+                        }
+                    }
+                }
+                @Override
+                public void changedUpdate(DocumentEvent e) {}
+            });
+
+
             notCertifiedTextFields.add(l5);
             JLabel l2 = new JLabel(quality.get(i));
             l2.setHorizontalAlignment(SwingConstants.CENTER);

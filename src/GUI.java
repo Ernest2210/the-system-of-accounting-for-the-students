@@ -1,9 +1,11 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -33,11 +35,33 @@ public class GUI {
         openFileButton = new JButton("Открыть файл");
         scrollPane = new JScrollPane(scrollPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
+        addTableButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                int ans = fileChooser.showOpenDialog(mainPanel);
+                ArrayList<GUITables> newTables = new ArrayList<>();
+                if (ans != 1){
+                    File file = fileChooser.getSelectedFile();
+                    try {
+                        newTables = FileManager.readFile(file);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    System.out.println(newTables.size());
+                    //TODO написать очистку оставшихся с прошлой работы таблиц
+                    for(int i = 0; i < newTables.size(); i++){
+                        printTables(newTables.get(i));
+                    }
+                }
+            }
+        });
+
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
-                System.out.println(fileChooser.showSaveDialog(mainPanel));
+                fileChooser.showSaveDialog(mainPanel);
                 File file = fileChooser.getSelectedFile();
                 String directory = file.getParent();
                 String fileName = file.getName();
@@ -45,6 +69,34 @@ public class GUI {
                     FileManager.saveFile(directory,fileName,tables);
                 } catch (IOException ex) {
                     ex.printStackTrace();
+                }
+            }
+        });
+
+        openFileButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                int ans = fileChooser.showOpenDialog(mainPanel);
+                ArrayList<GUITables> newTables = new ArrayList<>();
+                if (tables.size() != 0){
+                    scrollPanel.removeAll();
+                    scrollPanel.revalidate();
+                    scrollPanel.repaint();
+                    tables = new ArrayList<>();
+                }
+                if (ans != 1){
+                    File file = fileChooser.getSelectedFile();
+                    try {
+                        newTables = FileManager.readFile(file);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    System.out.println(newTables.size());
+                    //TODO написать очистку оставшихся с прошлой работы таблиц
+                    for(int i = 0; i < newTables.size(); i++){
+                        printTables(newTables.get(i));
+                    }
                 }
             }
         });
@@ -115,6 +167,16 @@ public class GUI {
         SwingUtilities.updateComponentTreeUI(jFrame);
     }
 
+    public static void printTables(GUITables guiTables){
+        guiTables.printEmptyTable();
+        if(!(tables.isEmpty())){
+            tables.get(tables.size()-1).tablePanel.setBorder(new EmptyBorder(0,0,5,0));
+        }
+        tables.add(guiTables);
+
+        SwingUtilities.updateComponentTreeUI(jFrame);
+    }
+
     public static void printTables(String FIO, String lesson, String grade,
                                    String numOfStud, ArrayList<String> fives,
                                    ArrayList<String> fours, ArrayList<String> threes,
@@ -125,6 +187,8 @@ public class GUI {
             tables.get(tables.size()-1).tablePanel.setBorder(new EmptyBorder(0,0,5,0));
         }
         tables.add(table);
+
+        SwingUtilities.updateComponentTreeUI(jFrame);
     }
 
     private static JFrame getFrame(){
