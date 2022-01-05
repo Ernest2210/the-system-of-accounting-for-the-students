@@ -143,16 +143,20 @@ public class GUI {
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.showSaveDialog(mainPanel);
-                File file = fileChooser.getSelectedFile();
-                String directory = file.getParent();
-                String fileName = file.getName();
-                try {
-                    FileManager.saveFile(directory,fileName,tables);
-                    Main.isFileSaved = true;
-                } catch (IOException ex) {
-                    ex.printStackTrace();
+                if(tables.size() == 0){
+                    JOptionPane.showMessageDialog(mainPanel, "Нельзя сохранять пустые файлы");
+                }else{
+                    JFileChooser fileChooser = new JFileChooser();
+                    fileChooser.showSaveDialog(mainPanel);
+                    File file = fileChooser.getSelectedFile();
+                    String directory = file.getParent();
+                    String fileName = file.getName();
+                    try {
+                        FileManager.saveFile(directory,fileName,tables);
+                        Main.isFileSaved = true;
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                 }
             }
         });
