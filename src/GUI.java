@@ -20,6 +20,7 @@ public class GUI {
     static public JButton addClearTableButton;
     static public JButton addTableButton;
     static public JButton openFileButton;
+    static public JButton saveAsPdf;
     static public JScrollPane scrollPane;
     static public JPanel scrollPanel;
 
@@ -60,6 +61,7 @@ public class GUI {
         addClearTableButton = new JButton("Добавить таблицу");
         addTableButton = new JButton("Добавить таблицу из файла");
         openFileButton = new JButton("Открыть файл");
+        saveAsPdf = new JButton("Сохранить в PDF");
         scrollPane = new JScrollPane(scrollPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         jFrame.addWindowListener(new WindowListener() {
@@ -140,6 +142,20 @@ public class GUI {
             }
         });
 
+        saveAsPdf.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(tables.size() == 0){
+                    JOptionPane.showMessageDialog(mainPanel, "Нельзя сохранять пустые файлы");
+                }else{
+                    JFileChooser fileChooser = new JFileChooser();
+                    fileChooser.showSaveDialog(mainPanel);
+                    File file = fileChooser.getSelectedFile();
+                    PdfCreater.createPdfFile(tables, file);
+                }
+            }
+        });
+
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -210,6 +226,7 @@ public class GUI {
         addPanel.add(addClearTableButton);
         addPanel.add(addTableButton);
         addPanel.add(openFileButton);
+        addPanel.add(saveAsPdf);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
         jFrame.add(mainPanel, BorderLayout.CENTER);
         jFrame.add(addPanel, BorderLayout.PAGE_START);
